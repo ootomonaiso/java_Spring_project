@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>書籍一覧</title>
+</head>
+<body>
+    <h2>書籍一覧</h2>
+
+    <!-- 追加されたラベル名の表示 -->
+    <p th:text="${addedLabel}"></p>
+    <p>
+        <input type="button" name="Home" value="ホームに戻る" onclick="location.href='/'">
+    </p>
+    <!-- データベース全体の書籍を表示 -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>書籍名</th>
+                <th>コード</th>
+                <th>貸し出し状況</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${allBooks}">
+                <td th:text="${book['ID']}"></td>
+                <td th:text="${book['BookName']}"></td>
+                <td th:text="${book['Code']}"></td>
+                <td th:utext="${book['Status'] == 'true' ? '貸出中' : '在架'}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ホームに戻るボタン -->
+
+</body>
+</html>

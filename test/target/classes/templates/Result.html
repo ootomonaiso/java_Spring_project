@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>検索結果</title>
+</head>
+<body>
+    <h2>検索結果</h2>
+
+    <!-- 結果を出してくれると思うよ -->
+    <div th:if="${searchResult != null}">
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>書籍名</th>
+                <th>コード</th>
+                <th>貸し出し状況</th>
+            </tr>
+            <tr th:each="result : ${searchResult}">
+                <td th:text="${result.ID}"></td>
+                <td th:text="${result.BookName}"></td>
+                <td th:text="${result.Code}"></td>
+				<td th:utext="${result.Status == 1 ? '貸出中' : '在架'}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 見つかんね -->
+	<p th:if="${#lists.isEmpty(searchResult)}">えいえんはあるよ。岐阜にあるよ。</p>
+
+    <!-- 実家に帰ります -->
+    <p>
+        <input type="button" name="Senisaki" value="もういっかい"
+               onclick="location.href='/senisaki'">
+    </p>
+</body>
+</html>

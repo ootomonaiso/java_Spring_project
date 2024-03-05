@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Book</title>
+</head>
+<body>
+
+    <h2>書籍一覧</h2>
+
+    <!-- 検索フォーム -->
+    <form method="get" action="/updatebook">
+        <label for="searchName">書籍名で検索:</label>
+        <input type="text" id="searchName" name="searchName" required>
+        <button type="submit">検索</button>
+    </form>
+
+    <!-- 書籍一覧表示 -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>書籍名</th>
+                <th>コード</th>
+                <th>ステータス</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody th:if="${not #lists.isEmpty(allBooks)}">
+            <!-- 書籍一覧データの表示 -->
+            <tr th:each="book : ${allBooks}">
+                <td th:text="${book.ID}"></td>
+                <td th:text="${book.BookName}"></td>
+                <td th:text="${book.Code}"></td>
+                <td>
+                    <!-- ステータス表示 -->
+                    <span th:text="${book.Status eq 1 ? '貸出中' : '在庫あり'}"></span>
+                </td>
+                <td>
+                    <!-- ステータス切り替えボタン -->
+                    <form method="post" th:action="@{/toggleStatus/{bookId}(bookId=${book.ID})}">
+                        <button type="submit" th:text="${book.Status eq 1 ? '返却する' : '借りる'}"></button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 検索結果が存在しない場合のエラーメッセージ -->
+    <div th:if="${#lists.isEmpty(allBooks)}">
+        <p>該当する書籍は見つかりませんでした。</p>
+    </div>
+
+    <p>
+        <input type="button" name="Home" value="ホームに戻る" onclick="location.href='/'">
+    </p>
+</body>
+</html>

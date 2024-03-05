@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>すごく遷移先</title>
+</head>
+<body>
+    <!-- フォームのヘッダー -->
+    <h1>すごい遷移先</h1>
+    
+    <!-- フォームの開始 -->
+<form action="/Result" method="post">
+    <!-- CSRFトークン -->
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+    <!-- 他のフォーム入力 -->
+    <label for="searchName">書籍名:</label>
+    <input type="text" id="searchName" name="searchName">
+    <button type="submit">検索</button>
+</form>
+    
+    <p>
+        <input type="button" name="Senisaki" value="サラ…帰ろう。"
+               onclick="location.href='/'">
+    </p>
+</body>
+</html>

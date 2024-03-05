@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>書籍追加</title>
+</head>
+<body>
+    <h2>書籍追加</h2>
+
+    <form action="/addBook" method="post" th:action="@{/addbook}">
+        <!-- CSRFトークン -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <label for="bookName">書籍名:</label>
+        <input type="text" id="bookName" name="bookName" required>
+        <br>
+
+        <label for="code">コード:</label>
+        <input type="text" id="code" name="code" required>
+        <br>
+
+        <label for="status">貸し出し状況:</label>
+        <select id="status" name="status" required>
+            <option value="false" selected>在架</option>
+            <option value="true">貸出中</option>
+        </select>
+        <br>
+
+        <input type="submit" value="追加">
+    </form>
+
+    <!-- ボタン回り -->
+    <p>
+        <input type="button" name="Senisaki" value="検索へ" onclick="location.href='/senisaki'">
+         <input type="button" name="Home" value="ホームに戻る" onclick="location.href='/'">
+    </p>
+</body>
+</html>
